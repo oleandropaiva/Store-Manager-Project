@@ -4,8 +4,10 @@ const productController = require('../controllers/productController');
 
 const productRouter = express.Router();
 
-productRouter.get('/', productController.findAll);
+productRouter.get('/products', productController.findAll);
 
-productRouter.get('/:id', productController.findById);
+productRouter.get('/products/:id', productController.findById);
+
+productRouter.post('/products', productController.create);
 
 module.exports = productRouter;

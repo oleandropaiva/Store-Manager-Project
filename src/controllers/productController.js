@@ -19,7 +19,19 @@ const findById = async (req, res) => {
   }
 };
 
+const create = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const product = await productService.create(name);
+    return res.status(201).json(product);
+  } catch (error) {
+    return res.status(500)
+      .json({ message: 'internal server error' });
+  }
+};
+
 module.exports = {
   findAll,
   findById,
+  create,
 };
