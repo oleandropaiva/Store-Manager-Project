@@ -1,8 +1,8 @@
 const salesService = require('../services/salesService');
 
 const findAll = async (_req, res) => {
-  const result = await salesService.findAll();
-  return res.status(200).json(result);
+  const data = await salesService.findAll();
+  return res.status(200).json(data);
 };
 
 const findById = async (req, res) => {
@@ -19,7 +19,27 @@ const findById = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const itens = req.body;
+
+    const idVald = await salesService.findById(id);
+    if (!idVald) return res.status(404).json({ message: 'Sale not found' });
+
+    const data = await salesService.update({ saleId: id }, itens);
+    if (!data) {
+      return res.status(404).json({ message: 'Sale not found' });
+    }
+    return res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'internal server error' });
+  }
+};
+
 module.exports = {
   findAll,
   findById,
+  update,
 };

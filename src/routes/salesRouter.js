@@ -1,4 +1,5 @@
 const express = require('express');
+const { idProduct, product } = require('../middlewares/validSale');
 
 const salesController = require('../controllers/salesController');
 
@@ -8,6 +9,6 @@ salesRouter.get('/', salesController.findAll);
 
 salesRouter.get('/:id', salesController.findById);
 
-// salesRouter.post('/products', salesController.create);
+salesRouter.put('/:id', idProduct, product, salesController.update);
 
 module.exports = salesRouter;

@@ -25,7 +25,31 @@ const findById = async (saleId) => {
   return query;
 };
 
+const updateSales = async () => {
+  const [result] = await connection
+    .execute('INSERT INTO StoreManager.sales (date) VALUES (NOW());');
+  return result.insertId;
+};
+
+const update = async (itemsSold) => {
+  const saleId = await updateSales();
+
+  itemsSold.forEach(async (item) => {
+    await connection
+      .execute(`INSERT INTO StoreManager.sales_products
+        (sale_id, product_id, quantity) VALUES (?, ?, ?);`,
+        [saleId, item.productId, item.quantity]);
+  });
+
+  const result = {
+    id: saleId,
+    itemsSold,
+  };
+  return result;
+};
+
 module.exports = {
   findAll,
   findById,
+  update,
 };
