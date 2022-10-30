@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const productController = require('../../../src/controllers/productController');
 const productService = require('../../../src/services/productService');
 
-describe('Testando lista dos produtos', () => {
+describe('Controllers - Testando lista dos produtos', () => {
   describe('/products - findAll', () => {
     describe('Caso de sucesso', () => {
       afterEach(() => {
@@ -41,48 +41,51 @@ describe('Testando lista dos produtos', () => {
         expect(res.json.calledWith([{ id: 1, name: 'testando' }])).to.be.equal(true);
       });
     });
+  });
 
-    describe('Testa a rota /products/:id - findById', () => {
-      describe('Caso de sucesso', () => {
-        afterEach(() => {
-          sinon.restore();
-        })
-        it('retorna null', async function () {
-          const req = {};
-          const res = {};
+  describe('Testa a rota /products/:id - findById', () => {
+    describe('Caso de sucesso', () => {
+      afterEach(() => {
+        sinon.restore();
+      })
+      it('retorna null', async function () {
+        const req = {};
+        const res = {};
 
-          req.params = {
-            id: 1,
-          };
+        req.params = {
+          id: 1,
+        };
 
-          res.status = sinon.stub().returns(res);
-          res.json = sinon.stub().returns();
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
 
-          const resultExecute = null;
-          sinon.stub(productService, 'findById').resolves(resultExecute);
+        const resultExecute = null;
+        sinon.stub(productService, 'findById').resolves(resultExecute);
 
-          await productController.findById(req, res);
+        await productController.findById(req, res);
 
-          expect(res.status.calledWith(404)).to.be.equal(true);
-          expect(res.json.calledWith({ message: 'Product not found' })).to.be.equal(true);
-        });
-        it('retorna o array com item', async function () {
-          const req = {};
-          const res = {};
-
-          req.params = {
-            id: 1,
-          };
-
-          res.status = sinon.stub().returns(res);
-          res.json = sinon.stub().returns();
-
-          const resultExecute = { id: 1, name: 'testando' };
-          sinon.stub(productService, 'findById').resolves(resultExecute);
-
-          await productController.findById(req, res);
-
-          expect(res.status.calledWith(200)).to.be.equal(true);
-          expect(res.json.calledWith({ id: 1, name: 'testando' })).to.be.equal(true);
-        });
+        expect(res.status.calledWith(404)).to.be.equal(true);
+        expect(res.json.calledWith({ message: 'Product not found' })).to.be.equal(true);
       });
+      it('retorna o array com item', async function () {
+        const req = {};
+        const res = {};
+
+        req.params = {
+          id: 1,
+        };
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+
+        const resultExecute = { id: 1, name: 'testando' };
+        sinon.stub(productService, 'findById').resolves(resultExecute);
+
+        await productController.findById(req, res);
+
+        expect(res.status.calledWith(200)).to.be.equal(true);
+        expect(res.json.calledWith({ id: 1, name: 'testando' })).to.be.equal(true);
+      });
+    });
+  });
+});
