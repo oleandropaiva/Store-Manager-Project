@@ -86,25 +86,25 @@ describe('Models - Testando lista dos produtos', () => {
     //   });
   });
 
-  // describe('Testando - /products - add', () => {
-  //   describe('Caso de sucesso', () => {
-  //     afterEach(() => {
-  //       sinon.restore();
-  //     })
-  //     it('retorna um objeto', async function () {
-  //       const resultExecute = [{ id: 1, name: 'testando' }];
-  //       sinon.stub(connection, 'execute').resolves([resultExecute]);
+  describe('Testando - /products - create', () => {
+    describe('Caso de sucesso', () => {
+      afterEach(() => {
+        sinon.restore();
+      })
+      it('retorna um objeto', async function () {
+        const resultExecute = [{ id: 1, name: 'testando' }];
+        sinon.stub(connection, 'execute').resolves([resultExecute]);
 
-  //       const realResult = await productModel.add('testando');
-  //       expect(realResult).to.be.an('object');
-  //     });
-  //     it('o objeto contém "id" e "name"', async function () {
-  //       const resultExecute = [{ id: 1, name: 'testando' }];
-  //       sinon.stub(connection, 'execute').resolves([resultExecute]);
+        const realResult = await productModel.create('testando');
+        expect(realResult).to.be.an('object');
+      });
+      it('o objeto contém "id" e "name"', async function () {
+        const resultExecute = [{ id: 1, name: 'testando' }];
+        sinon.stub(connection, 'execute').resolves([resultExecute]);
 
-  //       const realResult = await productModel.add('testando');
-  //       expect(realResult).to.all.keys('name', 'id')
-  //     });
-  //   });
-  // });
+        const realResult = await productModel.create('testando');
+        expect(realResult).to.all.keys('name', 'id')
+      });
+    });
+  });
 });
