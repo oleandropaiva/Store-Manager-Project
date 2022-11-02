@@ -20,7 +20,7 @@ const create = async (name) => {
 
 const prodRemove = async (id) => {
   const [data] = await connect.execute('DELETE FROM products WHERE id = ?;', [id]);
-  return data;
+  return data.affectedRows;
 };
 
 module.exports = {
