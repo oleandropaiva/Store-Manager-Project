@@ -4,8 +4,8 @@ const ERROR_MSG = { message: 'internal server error' };
 const NOT_FOUND = { message: 'Product not found' };
 
 const findAll = async (_req, res) => {
-  const result = await productService.findAll();
-  return res.status(200).json(result);
+  const data = await productService.findAll();
+  return res.status(200).json(data);
 };
 
 const findById = async (req, res) => {
@@ -34,8 +34,8 @@ const create = async (req, res) => {
 const prodRemove = async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await productService.prodRemove(id);
-    if (!result) {
+    const data = await productService.prodRemove(id);
+    if (!data) {
       return res.status(404).json(NOT_FOUND);
     }
     return res.status(204).json();
