@@ -19,8 +19,8 @@ const create = async (name) => {
 };
 
 const prodRemove = async (id) => {
-  const [data] = await connect.execute('DELETE FROM products WHERE id = ?;', [id]);
-  return data.affectedRows;
+  const [data] = await connect.execute('DELETE FROM StoreManager.products WHERE id = ?;', [id]);
+  return data;
 };
 
 module.exports = {
