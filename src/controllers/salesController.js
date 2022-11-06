@@ -40,12 +40,15 @@ const update = async (req, res) => {
   }
 };
 
-const deleteSale = (req, res) => {
-  const { id } = req.params;
+const deleteSale = async (req, res) => {
   try {
-    const data = salesService.deleteSale(id);
-    return res.status(404).json(data);
-    } catch (error) {
+    const { id } = req.params;
+    const data = await salesService.deleteSale(id);
+    if (!data) {
+      return res.status(404).json(notFound);
+    }
+    return res.status(204).json();
+  } catch (error) {
     return res.status(500).json(serverError);
   }
 };
