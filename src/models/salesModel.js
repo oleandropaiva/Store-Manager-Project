@@ -48,8 +48,15 @@ const update = async (itemsSold) => {
   return result;
 };
 
+const deleteSale = async (id) => {
+  const [data] = await connection
+    .execute('DELETE FROM sales WHERE id = ?;', [id]);
+  return data;
+};
+
 module.exports = {
   findAll,
   findById,
   update,
+  deleteSale,
 };

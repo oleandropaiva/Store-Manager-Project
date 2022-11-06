@@ -20,8 +20,15 @@ const update = async (saleId, itemsUpdated) => {
   return true;
 };
 
+const deleteSale = async (id) => {
+  const data = await salesModel.deleteSale(id);
+  if (data.affectedRows === 0) return false;
+  return true;
+};
+
 module.exports = {
   findAll,
   findById,
   update,
+  deleteSale,
 };

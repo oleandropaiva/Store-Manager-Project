@@ -1,3 +1,4 @@
+// const connection = require('./connection');
 const connect = require('./connection');
 
 const findAll = async () => {
