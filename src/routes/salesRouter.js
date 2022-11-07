@@ -7,7 +7,7 @@ const salesRouter = express.Router();
 
 salesRouter.get('/', salesController.findAll);
 
-salesRouter.post('/:id', idProduct, product, salesController.update);
+salesRouter.post('/', idProduct, product, salesController.update);
 
 salesRouter.get('/:id', salesController.findById);
 
