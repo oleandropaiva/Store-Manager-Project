@@ -33,8 +33,8 @@ const prodSearch = async (q) => {
   const [data] = await connect.execute(
     'SELECT * FROM StoreManager.products WHERE name LIKE ?;',
     [`%${q}%`],
-);
-  return data;
+  );
+    return data;
 };
 
 module.exports = {
