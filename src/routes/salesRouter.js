@@ -7,9 +7,9 @@ const salesRouter = express.Router();
 
 salesRouter.get('/', salesController.findAll);
 
-salesRouter.get('/:id', salesController.findById);
+salesRouter.post('/:id', idProduct, product, salesController.update);
 
-salesRouter.put('/:id', idProduct, product, salesController.update);
+salesRouter.get('/:id', salesController.findById);
 
 salesRouter.delete('/:id', salesController.deleteSale);
 

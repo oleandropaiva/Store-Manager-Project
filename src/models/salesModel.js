@@ -33,19 +33,17 @@ const updateSales = async () => {
 
 const update = async (itemsSold) => {
   const saleId = await updateSales();
-
   itemsSold.forEach(async (item) => {
-    await connection
-      .execute(`INSERT INTO StoreManager.sales_products
+    await connection.execute(`INSERT INTO StoreManager.sales_products
         (sale_id, product_id, quantity) VALUES (?, ?, ?);`,
         [saleId, item.productId, item.quantity]);
   });
 
-  const result = {
+  const data = {
     id: saleId,
     itemsSold,
   };
-  return result;
+  return data;
 };
 
 const deleteSale = async (id) => {

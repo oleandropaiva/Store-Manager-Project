@@ -24,18 +24,13 @@ const findById = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { id } = req.params;
     const itens = req.body;
+    const data = await salesService.update(itens);
+    if (!data) return res.status(404).json({ message: 'Product not found' });
 
-    const idVald = await salesService.findById(id);
-    if (!idVald) return res.status(404).json(notFound);
-
-    const data = await salesService.update({ saleId: id }, itens);
-    if (!data) {
-      return res.status(404).json(notFound);
-    }
-    return res.status(200).json(data);
+    return res.status(201).json(data);
   } catch (error) {
+    console.log(error);
     return res.status(500).json(serverError);
   }
 };
