@@ -58,10 +58,9 @@ const prodRemove = async (req, res) => {
   }
 };
 
-const prodSearch = async (req, res) => {
-  const { q } = req.query;
-
+const prodSearch = async (req, res) => {  
   try {
+    const { q } = req.query;
     const data = await productService.prodSearch(q);
 
     return res.status(200).json(data);

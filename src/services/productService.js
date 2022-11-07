@@ -20,15 +20,6 @@ const prodRemove = async (id) => {
   return true;
 };
 
-// const prodSearch = async (q) => {
-//   if (q === '') {
-//     const data = await productModel.findAll();
-//     return data;
-//   }
-//   const data = await productModel.prodSearch(q);
-//   return data;
-// };
-
 module.exports = {
   findAll,
   findById,
