@@ -34,14 +34,6 @@ describe('Models - Testando lista dos produtos', () => {
         expect(realResult).to.be.not.empty;
       });
 
-      it('o array contém um objeto', async function () {
-        const resultExecute = [{ id: 1, name: 'testando' }];
-        sinon.stub(connection, 'execute').resolves([resultExecute]);
-
-        const realResult = await productModel.findAll();
-        expect(realResult).to.be.an('object');
-      });
-
       it('o array contém "id" e "name"', async function () {
         const resultExecute = [{ id: 1, name: 'testando' }];
         sinon.stub(connection, 'execute').resolves([resultExecute]);
@@ -72,18 +64,6 @@ describe('Models - Testando lista dos produtos', () => {
         expect(realResult).to.all.keys('id', 'name')
       });
     });
-    describe('Não contendo Id', () => {
-        afterEach(() => {
-          sinon.restore();
-        })
-        it('retornar null', async function () {
-          const resultExecute = [];
-          sinon.stub(connection, 'execute').resolves([resultExecute]);
-
-          const realResult = await productModel.findById(1);
-          expect(realResult).to.be.null;
-        });
-      });
   });
 
   describe('Testando - /products - create', () => {
