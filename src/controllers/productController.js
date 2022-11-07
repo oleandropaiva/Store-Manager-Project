@@ -31,11 +31,11 @@ const create = async (req, res) => {
   }
 };
 
-const edit = async (req, res) => { 
+const prodUpdate = async (req, res) => { 
   try {
     const { id } = req.params;
     const { name } = req.body;
-    const data = await productService.edit({ name, id });
+    const data = await productService.prodUpdate({ name, id });
     if (!data) {
       return res.status(404).json(NOT_FOUND);
     }
@@ -58,10 +58,23 @@ const prodRemove = async (req, res) => {
   }
 };
 
+const prodSearch = async (req, res) => {
+  const { q } = req.query;
+
+  try {
+    const data = await productService.prodSearch(q);
+
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json(ERROR_MSG);
+  }
+};
+
 module.exports = {
   findAll,
   findById,
   create,
   prodRemove,
-  edit,
+  prodUpdate,
+  prodSearch,
 };
