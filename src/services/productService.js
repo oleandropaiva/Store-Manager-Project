@@ -6,6 +6,12 @@ const findById = async (id) => productModel.findById(id);
 
 const create = async (name) => productModel.create(name);
 
+const edit = async ({ name, id }) => { 
+  const data = await productModel.edit({ name, id });
+  if (data.affectedRows === 0) { return false; }
+  return true;
+};
+
 const prodRemove = async (id) => {
   const data = await productModel.prodRemove(id);
   if (data.affectedRows === 0) { return false; }
@@ -17,4 +23,5 @@ module.exports = {
   findById,
   create,
   prodRemove,
+  edit,
 };

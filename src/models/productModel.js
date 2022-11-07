@@ -18,6 +18,12 @@ const create = async (name) => {
   return { id: data.insertId, name };
 };
 
+const edit = async ({ name, id }) => { 
+  const [data] = await connect
+    .execute('UPDATE StoreManager.products SET name = ? WHERE id = ?;', [name, id]);
+  return data;
+};
+
 const prodRemove = async (id) => {
   const [data] = await connect.execute('DELETE FROM StoreManager.products WHERE id = ?;', [id]);
   return data;
@@ -27,5 +33,6 @@ module.exports = {
   findAll,
   findById,
   create,
+  edit,
   prodRemove,
 };

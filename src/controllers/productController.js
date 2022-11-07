@@ -31,6 +31,20 @@ const create = async (req, res) => {
   }
 };
 
+const edit = async (req, res) => { 
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const data = await productService.edit({ name, id });
+    if (!data) {
+      return res.status(404).json(NOT_FOUND);
+    }
+    return res.status(200).json({ id: Number(id), name });
+  } catch (error) {
+    return res.status(500).json(ERROR_MSG);
+  }
+};
+
 const prodRemove = async (req, res) => {
   try {
     const { id } = req.params;
@@ -49,4 +63,5 @@ module.exports = {
   findById,
   create,
   prodRemove,
+  edit,
 };
