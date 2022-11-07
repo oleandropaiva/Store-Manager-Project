@@ -1,9 +1,12 @@
 const productModel = require('../models/productModel');
 
 const findAll = async () => productModel.findAll();
+
 const findById = async (id) => productModel.findById(id);
 
 const create = async (name) => productModel.create(name);
+
+const prodSearch = async (q) => productModel.prodSearch(q);
 
 const prodUpdate = async ({ name, id }) => { 
   const data = await productModel.prodUpdate({ name, id });
@@ -17,14 +20,14 @@ const prodRemove = async (id) => {
   return true;
 };
 
-const prodSearch = async (q) => {
-  if (q === '') {
-    const data = await productModel.findAll();
-    return data;
-  }
-  const data = await productModel.prodSearch(q);
-  return data;
-};
+// const prodSearch = async (q) => {
+//   if (q === '') {
+//     const data = await productModel.findAll();
+//     return data;
+//   }
+//   const data = await productModel.prodSearch(q);
+//   return data;
+// };
 
 module.exports = {
   findAll,
