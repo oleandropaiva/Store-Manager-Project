@@ -40,8 +40,8 @@ const prodSearch = async (q) => {
 module.exports = {
   findAll,
   findById,
+  prodSearch,
   create,
   prodUpdate,
   prodRemove,
-  prodSearch,
 };

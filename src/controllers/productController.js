@@ -21,6 +21,17 @@ const findById = async (req, res) => {
   }
 };
 
+const prodSearch = async (req, res) => {  
+  try {
+    const { q } = req.query;
+    const data = await productService.prodSearch(q);
+    console.log(data);
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
 const create = async (req, res) => {
   try {
     const { name } = req.body;
@@ -58,22 +69,11 @@ const prodRemove = async (req, res) => {
   }
 };
 
-const prodSearch = async (req, res) => {  
-  try {
-    const { q } = req.query;
-    const data = await productService.prodSearch(q);
-
-    return res.status(200).json(data);
-  } catch (error) {
-    return res.status(500).json(error);
-  }
-};
-
 module.exports = {
   findAll,
   findById,
+  prodSearch,
   create,
   prodRemove,
   prodUpdate,
-  prodSearch,
 };
